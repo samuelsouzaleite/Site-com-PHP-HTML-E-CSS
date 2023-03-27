@@ -1,0 +1,58 @@
+@font-face {
+    font-family: "fonte-login";
+    src: url(Mont-HeavyDEMO.otf) format("opentype");
+}
+
+@font-face {
+    font-family: "fonte-label";
+    src: url(TT\ Chocolates\ Trial\ Regular.otf) format("opentype");
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body
+{
+    background-image: url(bg-imagem.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.cabecalho
+{
+    text-align: center;
+    font-family: "fonte-login";
+}
+   
+.box
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #00000080;
+    padding: 30px;
+    border-radius: 15px;
+}
+
+a
+{
+    text-decoration: none;
+    border: 3px solid aliceblue;
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 10px;
+    color: white;
+    font-family: "fonte-label";
+}
+
+a:hover
+{
+    background-color: aliceblue;
+    color: #000000;
+    
+}
