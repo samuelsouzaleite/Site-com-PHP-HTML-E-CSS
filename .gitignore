@@ -1,0 +1,14 @@
+# Atalhos e lixo do Windows
+*.lnk
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Configuração local sensível (se um dia separar credenciais)
+# config.local.php
+
+# Editores
+.vscode/
+.idea/

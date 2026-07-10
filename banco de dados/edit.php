@@ -7,30 +7,27 @@
 
         $id = $_GET['id'];
 
-        $sqlselect =  "SELECT * FROM cadastro where id=$id";
+        // Prepared statement: id vem separado do SQL (anti SQL Injection).
+        $sqlselect = "SELECT * FROM cadastro WHERE id = ?";
+        $stmt = $conexao->prepare($sqlselect);
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        $result = $conexao->query($sqlselect);
-
-        if($result->num_rows > 0);
+        if($result->num_rows > 0)
         {
-            while($user_data = mysqli_fetch_assoc($result))
-            {
-                $nome = $user_data['nome'];
-                $idade = $user_data['idade'];
-                $usuario = $user_data['usuario'];
-                $senha = $user_data['senha'];
-                $cpf = $user_data['cpf'];
-                $email = $user_data['email'];
-                $telefone = $user_data['telefone'];
-                $genero = $user_data['genero'];
-                $data_nasc = $user_data['data_nasc'];
-                $estado = $user_data['estado'];
-                $cidade = $user_data['cidade'];
-            }
-            // print_r($nome);
+            $user_data = $result->fetch_assoc();
+            $nome = $user_data['nome'];
+            $idade = $user_data['idade'];
+            $usuario = $user_data['usuario'];
+            $cpf = $user_data['cpf'];
+            $email = $user_data['email'];
+            $telefone = $user_data['telefone'];
+            $genero = $user_data['genero'];
+            $data_nasc = $user_data['data_nasc'];
+            $estado = $user_data['estado'];
+            $cidade = $user_data['cidade'];
         }
-        
-    
     }
     else
     {
@@ -71,8 +68,8 @@
                 </div>
 
                 <div class="div-formulario">
-                    <input class="input-form" type="text" name="senha" value="<?php echo $senha ?>" required></input>    
-                    <label for ="senha">Senha</label>
+                    <input class="input-form" type="password" name="senha" placeholder="deixe em branco para manter a atual"></input>
+                    <label for ="senha">Nova senha</label>
                 </div>
 
                 <div class="div-formulario">

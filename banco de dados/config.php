@@ -5,11 +5,5 @@
     $dbname = "samuel";
 
     $conexao = new mysqli($dbhost, $dbusername, $dbpassword, $dbname);
-
-    // if ($conexao->connect_errno)
-    // {
-    //     echo "erro";
-    // }
-    // else
-    // echo "conexao efetuada com sucesso";
+    $conexao->set_charset('utf8mb4');
 ?>

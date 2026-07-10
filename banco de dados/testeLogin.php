@@ -8,28 +8,24 @@
         $usuario = $_POST['usuario'];
         $senha = $_POST['senha'];
 
-        // print_r('Usuario: ' . $usuario);
-        // print_r('<br>');
-        // print_r('Senha: ' . $senha);
+        // Busca o usuário pelo nome (prepared statement, anti SQL Injection).
+        // A senha NÃO entra na query: comparamos o hash em PHP com password_verify.
+        $sql = "SELECT * FROM cadastro WHERE usuario = ?";
+        $stmt = $conexao->prepare($sql);
+        $stmt->bind_param('s', $usuario);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
 
-        $sql = "SELECT * FROM cadastro WHERE usuario = '$usuario' and senha = '$senha'";
-
-        $result = $conexao ->query($sql);
-
-        // print_r($sql);
-        // print_r($result);
-
-        if(mysqli_num_rows($result) <1 )
+        if($user && password_verify($senha, $user['senha']))
         {
-            unset($_SESSION['usuario']);
-            unset($_SESSION['senha']);
-            header('location: login.php');
+            $_SESSION['usuario'] = $user['usuario'];
+            header('location: sistema.php');
         }
         else
         {
-            $_SESSION['usuario'] = $usuario;
-            $_SESSION['senha'] = $senha;
-            header('location: sistema.php');
+            unset($_SESSION['usuario']);
+            header('location: login.php');
         }
     }
     else

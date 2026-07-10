@@ -6,15 +6,12 @@ if(!empty($_GET['id']))
 
         $id = $_GET['id'];
 
-        $sqlselect =  "SELECT * FROM cadastro where id=$id";
-
-        $result = $conexao->query($sqlselect);
-
-        if($result->num_rows > 0);
-        {
-           $sqldelete = "DELETE FROM cadastro WHERE id=$id";
-           $resultdelete = $conexao->query($sqldelete);
-        }    
+        // Prepared statement: id vem separado do SQL (anti SQL Injection).
+        $sqldelete = "DELETE FROM cadastro WHERE id = ?";
+        $stmt = $conexao->prepare($sqldelete);
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $stmt->close();
     }
     header('location: sistema.php');
 ?>

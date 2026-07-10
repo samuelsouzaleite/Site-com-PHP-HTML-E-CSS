@@ -1,44 +1,30 @@
 <?php
     if(isset($_POST['submit']))
     {
-        // print_r($_POST['nome']);
-        // print_r('<br>');
-        // print_r($_POST['idade']);
-        // print_r('<br>');
-        // print_r($_POST['usuario']);
-        // print_r('<br>');
-        // print_r($_POST['senha']);
-        // print_r('<br>');
-        // print_r($_POST['cpf']);
-        // print_r('<br>');
-        // print_r($_POST['email']);
-        // print_r('<br>');
-        // print_r($_POST['telefone']);
-        // print_r('<br>');
-        // print_r($_POST['genero']);
-        // print_r('<br>');
-        // print_r($_POST['data']);
-        // print_r('<br>');
-        // print_r($_POST['estado']);
-        // print_r('<br>');
-        // print_r($_POST['cidade']);
-
         include_once('config.php');
 
         $nome = $_POST['nome'];
         $idade = $_POST['idade'];
         $usuario = $_POST['usuario'];
-        $senha = $_POST['senha'];
+        // Guarda apenas o hash da senha, nunca o texto puro.
+        $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
         $cpf = $_POST['cpf'];
         $email = $_POST['email'];
         $telefone = $_POST['telefone'];
         $genero = $_POST['genero'];
-        $data_nasc = $_POST['data_nasc'];
+        // Campo DATE em branco vira NULL para não quebrar em modo estrito.
+        $data_nasc = !empty($_POST['data_nasc']) ? $_POST['data_nasc'] : null;
         $estado = $_POST['estado'];
         $cidade = $_POST['cidade'];
-        
-        $result = mysqli_query($conexao, "INSERT INTO cadastro(nome,idade,usuario,senha,cpf,email,telefone,genero,data_nasc,estado,cidade) 
-        VALUES('$nome','$idade', '$usuario','$senha', '$cpf', '$email','$telefone','$genero','$data_nasc','$estado','$cidade')");
+
+        // Prepared statement: os valores são enviados separados do SQL,
+        // então não há como o usuário injetar comandos (anti SQL Injection).
+        $sql = "INSERT INTO cadastro (nome, idade, usuario, senha, cpf, email, telefone, genero, data_nasc, estado, cidade)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $conexao->prepare($sql);
+        $stmt->bind_param('sisssssssss', $nome, $idade, $usuario, $senha, $cpf, $email, $telefone, $genero, $data_nasc, $estado, $cidade);
+        $stmt->execute();
+        $stmt->close();
 
         header('Location: login.php');
     }

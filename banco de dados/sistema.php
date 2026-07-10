@@ -2,11 +2,10 @@
     session_start();
     include_once('config.php');
     // print_r($_SESSION);
-    if((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == true))
+    if(!isset($_SESSION['usuario']))
     {
-        unset($_SESSION['usuario']);
-        unset($_SESSION['senha']);
         header('location: login.php');
+        exit;
     }
     $logado = $_SESSION['usuario'];
 
@@ -42,7 +41,6 @@
                     <th>Nome</th>
                     <th>Idade</th>
                     <th>Usuário</th>
-                    <th>Senha</th>
                     <th>CPF</th>
                     <th>E-mail</th>
                     <th>Telefone</th>
@@ -62,7 +60,6 @@
                     echo "<td>".$user_data['nome']."</td>";
                     echo "<td>".$user_data['idade']."</td>";
                     echo "<td>".$user_data['usuario']."</td>";
-                    echo "<td>".$user_data['senha']."</td>";
                     echo "<td>".$user_data['cpf']."</td>";
                     echo "<td>".$user_data['email']."</td>";
                     echo "<td>".$user_data['telefone']."</td>";
