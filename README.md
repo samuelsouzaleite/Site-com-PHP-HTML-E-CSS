@@ -8,7 +8,7 @@ aprender os fundamentos do PHP no lado do servidor e a integração com banco de
 
 ---
 
-## ✨ Funcionalidades
+## Funcionalidades
 
 - **Cadastro** de usuários com vários campos (nome, idade, usuário, senha, CPF, e-mail, telefone, gênero, data de nascimento, estado e cidade).
 - **Login** com sessão (`$_SESSION`) e área restrita.
@@ -16,14 +16,14 @@ aprender os fundamentos do PHP no lado do servidor e a integração com banco de
 - **Editar** e **excluir** registros (CRUD completo: Create, Read, Update, Delete).
 - **Logout** encerrando a sessão.
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 - **PHP 8** (MySQLi)
 - **MySQL / MariaDB**
 - **HTML5** e **CSS3** (com fontes e layout personalizados)
 - **XAMPP** (Apache + MySQL) para rodar localmente
 
-## 🔒 Boas práticas de segurança aplicadas
+## Boas práticas de segurança aplicadas
 
 Este projeto começou como exercício e foi depois revisado para aplicar práticas
 essenciais de segurança em PHP:
@@ -40,7 +40,7 @@ Para um ambiente de produção real ainda faltariam, por exemplo:
 - Proteção contra **CSRF** nos formulários.
 - Separar as credenciais do banco em configuração fora do versionamento.
 
-## 🚀 Como rodar localmente
+## Como rodar localmente
 
 1. Instale o [XAMPP](https://www.apachefriends.org/) e inicie **Apache** e **MySQL** no painel de controle.
 2. Copie a pasta `banco de dados` para dentro de `C:\xampp\htdocs\` (sugestão: renomeie para `cadastros`, sem espaços).
@@ -52,7 +52,7 @@ Para um ambiente de produção real ainda faltariam, por exemplo:
 
 > As credenciais padrão de conexão (`config.php`) são as do XAMPP: usuário `root`, sem senha.
 
-## 📁 Estrutura
+## Estrutura
 
 ```
 banco de dados/
@@ -69,7 +69,3 @@ banco de dados/
 ├── banco.sql         # Script de criação do banco e da tabela
 └── css/              # Estilos, fontes e imagens
 ```
-
-## 👤 Autor
-
-**Samuel** — projeto de estudo de PHP e MySQL.
